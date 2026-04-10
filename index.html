@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Алена Новикова | Юрист по гражданским делам в Новосибирске</title>
+    <!-- Подключаем красивый шрифт Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (иконки) - бесплатно -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 24px 16px;
+        }
+
+        /* Основная карточка-контейнер */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Стиль главного блока */
+        .lawyer-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        /* Верхняя цветная полоса */
+        .hero-bar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 32px 32px 48px 32px;
+            color: white;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            letter-spacing: 0.3px;
+        }
+
+        .name-title h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .specialty {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1e3c72;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary i {
+            color: #25D366;
+            font-size: 1.2rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: #f8fafc;
+        }
+
+        .btn-outline {
+            border: 1.5px solid white;
+            color: white;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Основной контент */
+        .content {
+            padding: 32px;
+        }
+
+        /* Секции */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 5px solid #2a5298;
+            padding-left: 18px;
+        }
+
+        .section-title i {
+            color: #2a5298;
+            font-size: 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .service-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 24px;
+            transition: 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-item i {
+            font-size: 1.8rem;
+            color: #2a5298;
+            margin-bottom: 12px;
+        }
+
+        .service-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .service-item p {
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: #e6f0ff;
+            color: #1e3c72;
+            font-weight: 700;
+            margin-top: 12px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+            padding: 14px 18px;
+            border-radius: 20px;
+        }
+
+        .info-row i {
+            width: 28px;
+            font-size: 1.4rem;
+            color: #2a5298;
+        }
+
+        .info-text {
+            font-weight: 500;
+        }
+
+        .info-text a {
+            color: #1e293b;
+            text-decoration: none;
+            border-bottom: 1px dashed #94a3b8;
+        }
+
+        .work-time {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .map-placeholder {
+            background: #e2e8f0;
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #475569;
+            margin-top: 12px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px 12px;
+            }
+            .hero-bar {
+                padding: 24px 20px 32px 20px;
+            }
+            .name-title h1 {
+                font-size: 1.7rem;
+            }
+            .content {
+                padding: 24px 20px;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="lawyer-card">
+        
+        <!-- Верхняя часть с именем и кнопками -->
+        <div class="hero-bar">
+            <div class="badge">
+                <i class="fas fa-gavel"></i> Гражданское право · Стаж 8 лет
+            </div>
+            <div class="name-title">
+                <h1>Новикова Алёна Владимировна</h1>
+                <div class="specialty">Юрист по гражданским делам | Новосибирск</div>
+            </div>
+            <div class="contact-buttons">
+                <a href="tel:+79137173006" class="btn btn-outline">
+                    <i class="fas fa-phone-alt"></i> +7 (913) 717-30-06
+                </a>
+                <a href="https://wa.me/79137173006?text=Здравствуйте! Нужна консультация юриста." target="_blank" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> Написать в WhatsApp
+                </a>
+                <a href="https://t.me/alenaschaste" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-telegram-plane"></i> Telegram
+                </a>
+            </div>
+        </div>
+
+        <!-- Основное содержание -->
+        <div class="content">
+            
+            <!-- Краткое описание -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>Помощь, когда важны результат и спокойствие</span>
+                </div>
+                <p style="font-size: 1.05rem; margin-bottom: 12px;">
+                    Помогаю жителям города Новосибирска и области решать гражданско-правовые споры. 
+                    
+                    <strong>Работаю честно, без перегрузки делами, каждому клиенту — внимание и четкий план действий. </strong>
+                </p>
+            </div>
+
+            <!-- Услуги и цены (ключевой блок) -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Услуги и стоимость</span>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <i class="fas fa-comment-dots"></i>
+                        <h3>Устная консультация</h3>
+                        <p>Анализ ситуации, перспективы, ответы на вопросы, изучение документов.</p>
+                        <div class="price-tag">1 000 ₽</div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-file-signature"></i>
+                        <h3>Составление документов</h3>
+                        <p>Иски, жалобы, претензии, ходатайства, договоры.</p>
+                        <div class="price-tag">от 3 000 ₽</div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Досудебное урегулирование</h3>
+                        <p>Претензионная работа, переговоры, мировые соглашения.</p>
+                        <div class="price-tag">от 5 000 ₽</div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-gavel"></i>
+                        <h3>Представительство в суде</h3>
+                        <p>Полное ведение дела в судах общей юрисдикции.</p>
+                        <div class="price-tag">от 10 000 ₽</div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-home"></i>
+                        <h3>Исполнительное производство</h3>
+                        <p></p>
+                        <div class="price-tag">от 5 000 ₽</div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Споры по долгам и кредитам</h3>
+                        <p>Оспаривание, реструктуризация.</p>
+                        <div class="price-tag">от 5 000 ₽</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Контакты и адрес -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Как меня найти</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-location-dot"></i>
+                    <div class="info-text">
+                        г. Новосибирск, ул. Фрунзе, 5, офис 209 <br>
+                        (БЦ «Фрунзе 5», 2 этаж)
+                    </div>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-clock"></i>
+                    <div class="info-text">
+                        <strong>Время работы:</strong> Пн–Пт: 09:00 – 18:00 <br>
+                        <span class="work-time">Вс–Сб — выходной, возможен приём по договорённости.</span>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-envelope"></i>
+                    <div class="info-text">
+                        Email: <a href="mailto:novikova@law-nsk.ru">femida_law@inbox.ru</a>
+                    </div>
+                </div>
+                <!-- Упрощенная карта (ссылка на яндекс карты) -->
+                <div class="map-placeholder">
+                    <i class="fas fa-map" style="font-size: 2rem; margin-bottom: 8px; display: block;"></i>
+                    <p>📍 Офис в центре Новосибирска, 5 минут от метро Красный проспект и Пл.Ленина</p>
+                    <a href="https://go.2gis.com/Xp8RQ" target="_blank" style="color:#2a5298; text-decoration: none;">Открыть карту →</a>
+                </div>
+            </div>
+
+            <!-- Доп. блок: почему выбирают -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-star-of-life"></i>
+                    <span>Почему обращаются ко мне</span>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+                    <div style="flex: 1; min-width: 180px;"><i class="fas fa-check-circle" style="color:#2a5298;"></i> <strong>Честный разбор</strong> — скажу, если дело проигрышное.</div>
+                    <div style="flex: 1; min-width: 180px;"><i class="fas fa-check-circle" style="color:#2a5298;"></i> <strong>Фиксированная цена</strong> без скрытых доплат.</div>
+                    <div style="flex: 1; min-width: 180px;"><i class="fas fa-check-circle" style="color:#2a5298;"></i> <strong>Онлайн-консультации</strong> для занятых клиентов.</div>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <i class="fas fa-shield-alt"></i> Информация на сайте не является публичной офертой. Для точной стоимости и стратегии — свяжитесь лично.
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
