@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новикова Алёна Владимировна - Юрист</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ======================== CSS Reset & Variables ======================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-color: #0b1120;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #958FA7; 
+            --accent-hover: #4f628c;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            --font-head: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* ======================== Фоновые эффекты ======================== */
+        .bg-shapes {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .blur-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+        }
+
+        .circle-1 {
+            top: -10%; left: -10%;
+            width: 50vw; height: 50vw;
+            background: #1e3a8a; /* Синий */
+        }
+
+        .circle-2 {
+            bottom: -10%; right: -5%;
+            width: 40vw; height: 40vw;
+            background: #958fa7; /* Коричнево-золотой */
+        }
+
+        /* ======================== Типографика и Общие стили ======================== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: #fff;
+            font-family: var(--font-head);
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ======================== Навигация ======================== */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 100;
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 101;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 98;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ======================== Hero Section ======================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, rgba(11, 17, 32, 0.9), rgba(11, 17, 32, 0.5)), 
+                        url('https://media.istockphoto.com/id/514559609/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BD%D0%B8%D0%B7%D0%BA%D0%B8%D0%B9-%D0%B2%D0%B8%D0%B4-%D0%BA%D0%BE%D0%BB%D0%BE%D0%BD%D0%BD-%D0%B2-%D1%80%D1%8F%D0%B4.jpg?s=612x612&w=0&k=20&c=aaO5UgAZ38mOyqaTF14YuWE31SABI3GUdcxHZ_Z8gtQ=') center/cover no-repeat;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        /* ======================== О юристе ======================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ======================== Услуги ======================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            text-align: left;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 { margin-bottom: 1rem; font-size: 1.2rem;}
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ======================== Прайс-лист ======================== */
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .price-name { font-weight: 500; font-size: 1.1rem; }
+        .price-value { font-family: var(--font-head); font-weight: 700; color: var(--accent-color); font-size: 1.2rem; }
+
+        .price-container { text-align: center; }
+
+        /* ======================== Отзывы ======================== */
+        .testimonials-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding: 1rem 0 2rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) var(--glass-bg);
+        }
+
+        .testimonials-slider::-webkit-scrollbar { height: 6px; }
+        .testimonials-slider::-webkit-scrollbar-track { background: var(--glass-bg); border-radius: 10px; }
+        .testimonials-slider::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+
+        .testimonial-card {
+            min-width: 350px;
+            scroll-snap-align: center;
+        }
+
+        .stars { color: #fbbf24; margin-bottom: 1rem; font-size: 0.9rem; }
+        .testimonial-text { font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .testimonial-author { font-weight: 600; font-family: var(--font-head); }
+
+        /* ======================== FAQ ======================== */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-family: var(--font-head);
+            font-weight: 600;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i { transition: transform 0.3s; }
+        .faq-question.active i { transform: rotate(180deg); color: var(--accent-color); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        /* ======================== Контакты и Карта ======================== */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info { margin-bottom: 2rem; }
+        .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); }
+        .contact-item i { color: var(--accent-color); font-size: 1.2rem; width: 20px; }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #fff;
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus { border-color: var(--accent-color); }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* ======================== Footer ======================== */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a { color: var(--accent-color); margin-left: 10px; }
+
+        /* ======================== Адаптивность ======================== */
+        @media (max-width: 992px) {
+            .hero-title { font-size: 2.8rem; }
+            .about-grid, .contacts-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-img { max-height: 400px; object-fit: cover; }
+        }
+
+        @media (max-width: 768px) {
+            .burger { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 280px; height: 100vh;
+                background: #0f172a;
+                flex-direction: column;
+                padding: 100px 2rem 2rem;
+                transition: 0.3s;
+                z-index: 99;
+                border-left: 1px solid var(--glass-border);
+            }
+            .nav-links.active { right: 0; }
+            .hero-title { font-size: 2.2rem; }
+            .price-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .testimonial-card { min-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shapes">
+        <div class="blur-circle circle-1"></div>
+        <div class="blur-circle circle-2"></div>
+    </div>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Юрист <span>Новикова</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="nav-link">Обо мне</a></li>
+                <li><a href="#services" class="nav-link">Услуги</a></li>
+                <li><a href="#pricing" class="nav-link">Цены</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contacts" class="nav-link">Контакты</a></li>
+            </ul>
+            <div class="burger" id="burgerMenu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Новикова Алёна Владимировна</h1>
+                <p class="hero-subtitle">Юрист по гражданским и арбитражным делам со стажем более 10 лет. Защита ваших интересов на высшем уровне.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <img src="https://www.shutterstock.com/image-photo/portrait-beautiful-business-woman-front-600nw-2475196651.jpg">
+                <div class="about-text">
+                    <h2>Обо мне</h2>
+                    <p>Специализируюсь на сложных судебных спорах. Выиграно более 500 дел в судах различной инстанции. Мой главный приоритет — это защита прав и законных интересов доверителя.</p>
+                    <p>Я гарантирую индивидуальный подход к каждому клиенту, глубокое погружение в детали дела и абсолютно полную конфиденциальность.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Я помогу, если Вам нужна помощь в следующих ситуациях:</h2>
+            <div class="services-grid">
+                
+                <div class="glass-card service-card">
+                    <i class="fa-solid fa-people-arrows service-icon"></i>
+                    <h3>Семейные споры</h3>
+                    <p>Развод, раздел совместно нажитого имущества, взыскание алиментов, определение места жительства и порядка общения с ребенком.</p>
+                </div>
+
+                <div class="glass-card service-card">
+                    <i class="fa-solid fa-file-signature service-icon"></i>
+                    <h3>Наследственное право</h3>
+                    <p>Помощь во вступлении в наследство, оспаривание завещания, восстановление пропущенных сроков, разрешение споров между наследниками.</p>
+                </div>
+
+                <div class="glass-card service-card">
+                    <i class="fa-solid fa-shield-halved service-icon"></i>
+                    <h3>Защита прав потребителей</h3>
+                    <p>Возврат некачественного товара, споры со страховыми компаниями (ОСАГО/КАСКО), взыскание неустоек с застройщика по ДДУ.</p>
+                </div>
+
+                <div class="glass-card service-card">
+                    <i class="fa-solid fa-scale-balanced service-icon"></i>
+                    <h3>Арбитраж и взыскание</h3>
+                    <p>Сопровождение сделок, взыскание дебиторской задолженности, арбитражные споры, банкротство физических и юридических лиц.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container price-container">
+            <h2>Стоимость услуг</h2>
+            <div class="price-list">
+                
+                <div class="glass-card price-item">
+                    <span class="price-name">Устная консультация (онлайн/офлайн)</span>
+                    <span class="price-value">Бесплатно</span>
+                </div>
+
+                <div class="glass-card price-item">
+                    <span class="price-name">Письменная консультация / Составление претензии</span>
+                    <span class="price-value">от 5 000 ₽</span>
+                </div>
+
+                <div class="glass-card price-item">
+                    <span class="price-name">Представление интересов в суде (1 инстанция)</span>
+                    <span class="price-value">от 50 000 ₽</span>
+                </div>
+
+                <div class="glass-card price-item">
+                    <span class="price-name">Абонентское юридическое обслуживание бизнеса</span>
+                    <span class="price-value">от 25 000 ₽ / мес.</span>
+                </div>
+
+            </div>
+            <a href="#contacts" class="btn">Уточнить стоимость под задачу</a>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2>Отзывы доверителей</h2>
+            <div class="testimonials-slider">
+                
+                <div class="glass-card testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Александр Петрович помог выиграть сложное дело по разделу имущества. Профессионал своего дела, всегда на связи и объясняет сложные вещи простым языком."</p>
+                    <p class="testimonial-author">— Иван И.</p>
+                </div>
+
+                <div class="glass-card testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Обращалась по вопросу взыскания неустойки с застройщика. Суд полностью удовлетворил наши требования. Огромная благодарность за проделанную работу!"</p>
+                    <p class="testimonial-author">— Елена С.</p>
+                </div>
+
+                <div class="glass-card testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Наша компания сотрудничает с Александром уже более двух лет на абонентском обслуживании. Решены десятки арбитражных споров. Рекомендуем."</p>
+                    <p class="testimonial-author">— Компания "Ромашка"</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="container">
+            <h2>Часто задаваемые вопросы</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item">
+                    <button class="faq-question">Сколько длится бракоразводный процесс? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>В среднем, если нет споров о детях и имуществе, процесс через суд занимает 1-2 месяца. При наличии споров разбирательство может длиться от 3 до 6 месяцев и более.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Какие документы нужны для вступления в наследство? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Основной пакет включает: свидетельство о смерти, паспорт наследника, документы подтверждающие родство, а также правоустанавливающие документы на имущество.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Беретесь ли вы за дела в других городах? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Да, я веду дела в различных регионах РФ. Возможен выезд или ведение дела дистанционно с использованием систем онлайн-заседаний.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Как происходит оплата услуг? <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Оплата производится официально по договору об оказании юридических услуг. Возможна рассрочка платежа. Расходы на адвоката в случае выигрыша взыскиваются с проигравшей стороны.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts">
+        <div class="container">
+            <h2>Свяжитесь со мной</h2>
+            <div class="contacts-grid">
+                
+                <div class="glass-card">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+7 (913)-924-12-15</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>femida_law@inbox.ru</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>г. Новосибирск, ул. Фрунзе, д. 5, офис 209</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-brands fa-telegram"></i>
+                            <span>@alenaschaste</span>
+                        </div>
+                    </div>
+
+                    <h3>Оставьте заявку</h3>
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" id="name" placeholder="Ваше имя" required>
+                        <input type="tel" id="phone" placeholder="Ваш телефон" required>
+                        <button type="submit" class="btn" style="width: 100%;">Отправить</button>
+                    </form>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://yandex.ru/map-widget/v1/?text=Новосибирск,+ул.+Фрунзе,+5" width="100%" height="400" frameborder="0" allowfullscreen="true" style="border:0;"></iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Новикова Алёна Владимировна. Все права защищены. <a href="#"></a></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Мобильное меню (Бургер) ---
+        const burger = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        const overlay = document.getElementById('mobileOverlay');
+        const links = document.querySelectorAll('.nav-link');
+
+        function toggleMenu() {
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+            
+            // Меняем иконку бургера
+            const icon = burger.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        burger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Закрываем меню при клике на ссылку
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // --- 2. Аккордеон (FAQ) ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                // Закрываем другие (по желанию, можно убрать для независимого открытия)
+                faqQuestions.forEach(q => {
+                    if (q !== this) {
+                        q.classList.remove('active');
+                        q.nextElementSibling.style.maxHeight = null;
+                    }
+                });
+
+                // Тоггл текущего
+                this.classList.toggle('active');
+                const answer = this.nextElementSibling;
+                
+                if (answer.style.maxHeight) {
+                    answer.style.maxHeight = null;
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+
+        // --- 3. Отправка формы ---
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Имитация отправки
+            setTimeout(() => {
+                alert('Спасибо! Ваша заявка отправлена (демо-режим). В ближайшее время я свяжусь с вами.');
+                form.reset();
+            }, 300);
+        });
+    </script>
+</body>
+</html>
